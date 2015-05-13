@@ -3,6 +3,7 @@ package openpnc.graphics;
 import openpnc.graphics.IGraphic;
 
 import openpnc.graphics.messages.VisibleMessage;
+import openpnc.graphics.messages.AnimationValueMessage;
 
 import openpnc.messaging.IMessage;
 import openpnc.messaging.MessageSwitch;
@@ -25,8 +26,9 @@ class BasicSpriteGraphic implements IGraphic
 		
 		Switch = new MessageSwitch ();
 		
-		Switch.SetSwitch ( VisibleMessage.MESSAGEID_MAKE_VISIBLE, OnMakeVisible, VisibleMessage );
-		Switch.SetSwitch ( VisibleMessage.MESSAGEID_MAKE_INVISIBLE, OnMakeInvisible, VisibleMessage );
+		Switch.SetSwitch ( VisibleMessage.MESSAGEID_MAKE_VISIBLE, OnMakeVisible );
+		Switch.SetSwitch ( VisibleMessage.MESSAGEID_MAKE_INVISIBLE, OnMakeInvisible );
+		Switch.SetSwitch ( AnimationValueMessage.MESSAGEID_ANIMATION_VALUE_MESSAGE, OnAnimationValue, AnimationValueMessage );
 		
 	};
 	
@@ -90,6 +92,21 @@ class BasicSpriteGraphic implements IGraphic
 	{
 		
 		Graphic.visible = false;
+		
+	};
+	
+	private function AnimationValueMessage ( Message:AnimationValueMessage ) : Void
+	{
+		
+		switch ( Message.GetValueName () )
+		{
+		case "X":
+			Graphic.x = Message.GetValue ();
+			
+		case "Y":
+			Graphic.y = Message.GetValue ();
+			
+		}
 		
 	};
 	

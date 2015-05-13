@@ -1,13 +1,9 @@
 package openpnc.graphics.messages;
 
-import openpnc.messaging.Message;
-
-import openpnc.dynamics.IInventoryItem;
-
-class AddInevtoryUIItemMessage extends Message
+class RemoveInventoryUIItemMessage
 {
 	
-	public static inline var MESSAGEID_ADD_INVUI_ITEM:String = "invui_add_item";
+	public static inline var MESSAGEID_REMOVE_INVUI_ITEM:String = "invui_remove_item";
 	
 	private var Item:IInventoryItem;
 	
@@ -20,7 +16,7 @@ class AddInevtoryUIItemMessage extends Message
 		
 	};
 	
-	public function ResetAddInevtoryUIItemMessage ( Item:IInventoryItem, Target:String ) : Void
+	public function ResetRemoveInevtoryUIItemMessage ( Item:IInventoryItem, Target:String ) : Void
 	{
 		
 		ResetMessage ( MESSAGEID_ADD_INVUI_ITEM, Target );
